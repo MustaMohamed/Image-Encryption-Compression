@@ -7,14 +7,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
-import static sample.Helpers.ImageControllers.ImageLoader.*;
+import static sample.Helpers.ImageControllers.ImageLoader.getImageHeight;
+import static sample.Helpers.ImageControllers.ImageLoader.getImageWidth;
+
+/**
+ * Static class has static functions deal with converting image
+ *
+ * @author Musta Mohamed
+ */
 
 public class ImageConverter {
   
   /**
-   * this function convert 2D pixels array to Image buffer that we can save
-   * @param sourcePixelsArray 2D pixels array
-   * @return Buffered image can be saved
+   * this function convert 2D Pixels Matrix to Image buffer that we can save
+   *
+   * @param sourcePixelsArray 2D Pixel  the source image in Matrix of Color pixels
+   *
+   * @return BufferedImage              the image buffer that can be saved
    */
   public static BufferedImage convertPixelsArrayToImage(@NotNull Pixel[][] sourcePixelsArray) {
     // get height and width of the image
@@ -24,23 +33,25 @@ public class ImageConverter {
     BufferedImage targetImage = new BufferedImage(imageWidth, imageHeight,
       BufferedImage.TYPE_INT_RGB);
     
-    for(int i = 0; i < imageHeight - 1; i++) {
+    for (int i = 0; i < imageHeight - 1; i++) {
       
       for (int j = 0; j < imageWidth - 1; j++) {
         
         // convert the pixels to integer value
         targetImage.setRGB(j, i, sourcePixelsArray[i][j].getRGB());
       }
-    } return targetImage;
+    }
+    return targetImage;
   }
-  
-  
   
   /**
    * This function takes BufferImage class var and make operations on the pixels
-   * and convert each RGB value to a color pixel by faster method
-   * @param sourceImageBuffer bufferImage has the image
-   * @return 2D array of Color pixels
+   * <p>
+   * Convert each RGB value to a color pixel by faster method
+   *
+   * @param sourceImageBuffer BufferImage   the image buffer has the image
+   *
+   * @return 2D Pixel                       the Matrix of Color pixels
    */
   public static Pixel[][] fastConvertImageToPixelsArray(BufferedImage sourceImageBuffer) {
     // get height and width of the image
@@ -51,8 +62,9 @@ public class ImageConverter {
     Pixel[][] targetArray = new Pixel[imageHeight][imageWidth];
     
     final byte[] pixels = ((DataBufferByte) sourceImageBuffer.getRaster().getDataBuffer()).getData();
-    if(sourceImageBuffer.getAlphaRaster() == null)
-      for(int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += 3) {
+    
+    if (sourceImageBuffer.getAlphaRaster() == null) {
+      for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += 3) {
         
         int argb = 0;
         argb += -16777216; // 255 alpha
@@ -68,8 +80,8 @@ public class ImageConverter {
           col = 0; row++;
         }
       }
-    else
-      for(int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += 4) {
+    } else {
+      for (int pixel = 0, row = 0, col = 0; pixel < pixels.length; pixel += 4) {
         
         int argb = 0;
         argb |= (((int) pixels[pixel + 1] & 0xff)); // blue
@@ -84,16 +96,18 @@ public class ImageConverter {
           col = 0; row++;
         }
       }
+    }
     return targetArray;
   }
   
-  
   /**
-   * This function takes BufferImage class var and make operations on the pixels
-   * and convert each RGB value to a color pixel
+   * This function takes BufferImage class var and make operations on the pixels.
+   * <p>
+   * Convert each RGB value to a color pixel
    *
-   * @param sourceImageBuffer bufferImage has the image
-   * @return 2D array of Color pixels
+   * @param sourceImageBuffer BufferImage   the image buffer has the image
+   *
+   * @return 2D Pixel                       the Matrix of Color pixels
    */
   public static Pixel[][] convertImageToPixelsArray(BufferedImage sourceImageBuffer) {
     // get height and width of the image
@@ -103,7 +117,7 @@ public class ImageConverter {
     // create 2D array of pixels color of same size of the image
     Pixel[][] targetArray = new Pixel[imageHeight][imageWidth];
     
-    for(int i = 0; i < imageHeight; i++) {
+    for (int i = 0; i < imageHeight; i++) {
       
       for (int j = 0; j < imageWidth; j++) {
         
@@ -118,6 +132,5 @@ public class ImageConverter {
     }
     return targetArray;
   }
-  
   
 }

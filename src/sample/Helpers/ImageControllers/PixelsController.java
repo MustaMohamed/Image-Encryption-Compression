@@ -5,11 +5,15 @@ import sample.Helpers.ImageContainers.Pixel;
 
 /**
  * Static Class to deal with Encrypt and Decrypt operations
+ *
+ * @author Musta Mohamed
  */
 public class PixelsController {
   
   /**
-   * this function encrypting an image matrix with key and tap position
+   * this function encrypting an image matrix with key and tap position.
+   * <p>
+   * by using Linear Feedback Shift Register algorithm
    *
    * @param Key          int       the key of the encryption operation
    * @param sourceMatrix 2D Pixel  array hols the source image to encrypted
@@ -54,7 +58,9 @@ public class PixelsController {
   
   /**
    * this function do the shifting operations on the key with tap
-   * and return new key value
+   * and return new key value.
+   * <p>
+   * Linear Feedback Shift Register algorithm is applied
    *
    * @param Key int   the value to be shifted
    * @param tap int   the position of the bit to XOR with key

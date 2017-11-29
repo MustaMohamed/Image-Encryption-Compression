@@ -1,17 +1,18 @@
 package sample.Helpers.ImageContainers;
 
-import sample.Helpers.CustomExceptions.ImageNotEncryptedException;
 import sample.Helpers.CustomExceptions.ImageLoadingException;
-import sample.Helpers.ImageControllers.ImageLoader;
+import sample.Helpers.CustomExceptions.ImageNotEncryptedException;
 import sample.Helpers.ImageControllers.ImageConverter;
+import sample.Helpers.ImageControllers.ImageLoader;
 import sample.Helpers.ImageControllers.PixelsController;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Instance Class to hold the image data
+ *
+ * @author Musta Mohamed
  */
 public class ImageHolder {
   
@@ -22,6 +23,13 @@ public class ImageHolder {
   private Pixel[][] mImageEncryptedMatrix;
   private boolean mIsEncrypted;
   
+  /**
+   * Object Constructor takes the image file and convert it to a 2D Pixel Matrix
+   *
+   * @param sourceImageFile File    the image file
+   *
+   * @throws ImageLoadingException an exception if the image can't be loaded
+   */
   public ImageHolder(File sourceImageFile) throws ImageLoadingException {
     this.mImageFile = sourceImageFile;
     this.mImagePath = mImageFile.getAbsolutePath();
@@ -34,25 +42,36 @@ public class ImageHolder {
     this.mIsEncrypted = false;
   }
   
+  /**
+   * Save the image to file
+   */
   public void saveImage() {
     ImageLoader.saveImage(this.mImageMatrix);
   }
   
+  /**
+   * Encrypt the image using key and tap position
+   *
+   * @param key         int   the key to use it in encryption operation
+   * @param tapPosition int   the tap position used in encryption operations
+   *
+   * @see "PixelsController.Encrypt function documentation"
+   */
   public void encryptImage(int key, int tapPosition) {
     this.mIsEncrypted = true;
     this.mImageEncryptedMatrix = PixelsController.Encrypt(key, this.mImageMatrix, tapPosition);
   }
   
   public Pixel[][] getEncryptedMatrix() throws ImageNotEncryptedException {
-    if(!mIsEncrypted) {
+    if (!mIsEncrypted) {
       throw new ImageNotEncryptedException("This image isn't encrypted..!");
     }
     return this.mImageEncryptedMatrix;
   }
   
   public Pixel[][] getDecryptedMatrix(int key, int tapPosition) throws ImageNotEncryptedException {
-    if(!mIsEncrypted) {
-      throw new ImageNotEncryptedException("This image isn't encrypted..!");
+    if (!mIsEncrypted) {
+      throw new ImageNotEncryptedException("This image isn't decrypted..!");
     }
     return PixelsController.Encrypt(key, this.mImageMatrix, tapPosition);
   }
