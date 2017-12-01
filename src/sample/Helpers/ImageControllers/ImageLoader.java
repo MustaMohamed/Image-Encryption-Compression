@@ -188,7 +188,7 @@ public class ImageLoader {
     
     try {
       // write the image in a file of png format
-      ImageIO.write(targetImage, "jpg", imageFile);
+      ImageIO.write(targetImage, "bmp", imageFile);
     } catch (IOException e) {
       e.printStackTrace();
     }

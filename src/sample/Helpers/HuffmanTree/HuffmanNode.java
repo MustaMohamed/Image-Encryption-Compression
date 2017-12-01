@@ -7,19 +7,19 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HuffmanNode implements Comparable<HuffmanNode> {
   
-  private char mNodeValue;
-  private int mFrequency;
+  private int mNodeValue;
+  private long mFrequency;
   private HuffmanNode mRightNode;
   private HuffmanNode mLeftNode;
   
-  public HuffmanNode(char nodeValue, int frequency, HuffmanNode rightNode, HuffmanNode leftNode) {
+  public HuffmanNode(int nodeValue, long frequency, HuffmanNode rightNode, HuffmanNode leftNode) {
     this.mNodeValue = nodeValue;
     this.mFrequency = frequency;
     this.mRightNode = rightNode;
     this.mLeftNode = leftNode;
   }
   
-  public HuffmanNode(char mNodeValue, int mFrequency) {
+  public HuffmanNode(int mNodeValue, long mFrequency) {
     this.mNodeValue = mNodeValue;
     this.mFrequency = mFrequency;
     this.mRightNode = null;
@@ -31,29 +31,53 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
     this.mLeftNode = null;
   }
   
-  public boolean isLeaf() {
-    return this.mRightNode == null || this.mLeftNode == null;
-  }
-  
-  public char getNodeValue() {
-    return mNodeValue;
-  }
-  
-  public int getFrequency() {
-    return mFrequency;
-  }
-  
   public HuffmanNode getRightNode() {
     return mRightNode;
+  }
+  
+  public void setRightNode(HuffmanNode rightNode) {
+    this.mRightNode = rightNode;
   }
   
   public HuffmanNode getLeftNode() {
     return mLeftNode;
   }
   
+  public void setLeftNode(HuffmanNode leftNode) {
+    this.mLeftNode = leftNode;
+  }
+  
+  public int getNodeValue() {
+    return mNodeValue;
+  }
+  
+  public long getFrequency() {
+    return mFrequency;
+  }
+  
+  public boolean isLeaf() {
+    return this.mRightNode == null && this.mLeftNode == null;
+  }
+  
   @Override
   public int compareTo(@NotNull HuffmanNode o) {
-    return this.mFrequency - o.getFrequency();
+    int compValue = 0;
+    if(this.mFrequency > o.getFrequency()) compValue = 1;
+    if(this.mFrequency < o.getFrequency()) compValue = -1;
+    return compValue;
+  }
+  
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    
+    HuffmanNode that = (HuffmanNode) o;
+    
+    if (mNodeValue != that.mNodeValue) return false;
+    if (mFrequency != that.mFrequency) return false;
+    if (mRightNode != null ? !mRightNode.equals(that.mRightNode) : that.mRightNode != null) return false;
+    return mLeftNode != null ? mLeftNode.equals(that.mLeftNode) : that.mLeftNode == null;
   }
   
   @Override

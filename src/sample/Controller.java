@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import sample.Helpers.CustomExceptions.ImageLoadingException;
 import sample.Helpers.CustomExceptions.ImageNotEncryptedException;
 import sample.Helpers.ImageContainers.ImageHolder;
+import sample.Helpers.ImageContainers.Pixel;
 import sample.Helpers.ImageControllers.ImageConverter;
 import sample.Helpers.ImageControllers.ImageLoader;
 
@@ -45,7 +46,7 @@ public class Controller implements Initializable {
   @FXML
   private TextField txtKeyValue;
   
-  private static String computeTime(long nanoSecs) {
+  public static String computeTime(long nanoSecs) {
   
     /*long startTime = System.nanoTime();
     long endTime = System.nanoTime();
