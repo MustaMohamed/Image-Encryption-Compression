@@ -73,7 +73,7 @@ public class ImageHolder {
     if (!mIsEncrypted) {
       throw new ImageNotEncryptedException("This image isn't decrypted..!");
     }
-    return PixelsController.Encrypt(key, this.mImageMatrix, tapPosition);
+    return PixelsController.Encrypt(key, this.mImageEncryptedMatrix, tapPosition);
   }
   
   public String getImagePath() {
