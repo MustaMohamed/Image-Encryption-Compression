@@ -1,5 +1,7 @@
 package sample.Helpers.HuffmanTree;
 
+import sample.Helpers.CustomExceptions.TreeNotBuiltException;
+
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -16,7 +18,7 @@ public class HuffmanTree {
   private Vector<HuffmanNode> mTreeNodes;
   private Map<Integer, String> mTreePaths;
   private String mTreeCode;
-  
+  private boolean isBuilt;
   public HuffmanTree() {
     this.mRootNode = null;
     this.mNodeCounter = 0;
@@ -72,7 +74,8 @@ public class HuffmanTree {
     return mNodeFrequency.get(nodeValue);
   }
   
-  public String getNodePath(int nodeValue) {
+  public String getNodePath(int nodeValue) throws TreeNotBuiltException {
+    if(!isBuilt) throw new TreeNotBuiltException("The Tree is Not built...!");
     return mTreePaths.get(nodeValue);
   }
   
@@ -91,6 +94,8 @@ public class HuffmanTree {
     
     // build nodes paths
     buildPaths();
+    
+    this.isBuilt = true;
   }
   
   private void initPQ() {
