@@ -3,7 +3,7 @@ package sample.Helpers.HuffmanTree;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Instance Class te represent Huffman Tree Node
+ * Instance Class to represent Huffman Tree Node
  *
  * @author Musta Mohamed
  */

@@ -34,7 +34,7 @@ public class ImageHolder {
     this.mImageFile = sourceImageFile;
     this.mImagePath = mImageFile.getAbsolutePath();
     try {
-      this.mImageMatrix = ImageLoader.loadImage(mImageFile, false);
+      this.mImageMatrix = ImageLoader.loadImage(mImageFile, true);
     } catch (ImageLoadingException ex) {
       throw new ImageLoadingException("This image can't be loaded...!");
     }
@@ -57,7 +57,7 @@ public class ImageHolder {
    *
    * @see "PixelsController.Encrypt function documentation"
    */
-  public void encryptImage(int key, int tapPosition) {
+  public void encryptImage(String key, int tapPosition) {
     this.mIsEncrypted = true;
     this.mImageEncryptedMatrix = PixelsController.Encrypt(key, this.mImageMatrix, tapPosition);
   }
@@ -69,7 +69,7 @@ public class ImageHolder {
     return this.mImageEncryptedMatrix;
   }
   
-  public Pixel[][] getDecryptedMatrix(int key, int tapPosition) throws ImageNotEncryptedException {
+  public Pixel[][] getDecryptedMatrix(String key, int tapPosition) throws ImageNotEncryptedException {
     if (!mIsEncrypted) {
       throw new ImageNotEncryptedException("This image isn't decrypted..!");
     }

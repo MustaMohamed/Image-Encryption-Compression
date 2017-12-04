@@ -14,7 +14,7 @@ import java.util.Vector;
  */
 public class HuffmanTree {
   
-  // the rood node that holds the tree
+  // the root node that holds the tree
   private HuffmanNode mRootNode;
   // the number of nodes in tree
   private int mNodeCounter;
@@ -174,7 +174,7 @@ public class HuffmanTree {
     // generate node paths
     searchPath(mRootNode, new StringBuilder());
     // convert paths to char
-    //convertPaths();
+    convertPaths();
   }
   
   /**
@@ -218,7 +218,7 @@ public class HuffmanTree {
       "\n, mNodeFrequency=" + mNodeFrequency +
       "\n, mTreeNodes=" + mTreeNodes +
       "\n, mTreePaths=" + mTreePaths +
-      "\n, mTreeCode='" + mTreeCode + '\'' +
+      "\n, mTreeCode='" + mTreeCode.length() + '\'' +
       '}';
   }
 }
