@@ -48,7 +48,7 @@ public class CompressionController {
         if(mFrequencies[j][i] > 0) {
           if (j == 0) mRedTree.addNode(new HuffmanNode(i, mFrequencies[j][i]));
           else if (j == 1) mGreenTree.addNode(new HuffmanNode(i, mFrequencies[j][i]));
-          else if (j == 2) mBlueTree.addNode(new HuffmanNode(i, mFrequencies[j][i]));
+          else mBlueTree.addNode(new HuffmanNode(i, mFrequencies[j][i]));
         }
       }
     }
@@ -58,8 +58,5 @@ public class CompressionController {
     mRedTree.buildTree();
     mGreenTree.buildTree();
     mBlueTree.buildTree();
-    System.out.println(mRedTree.toString());
-    System.out.println(mGreenTree.toString());
-    System.out.println(mBlueTree.toString());
   }
 }
