@@ -34,7 +34,7 @@ public class ImageHolder {
     this.mImageFile = sourceImageFile;
     this.mImagePath = mImageFile.getAbsolutePath();
     try {
-      this.mImageMatrix = ImageLoader.loadImage(mImageFile, true);
+      this.mImageMatrix = ImageLoader.loadImage(mImageFile, false);
     } catch (ImageLoadingException ex) {
       throw new ImageLoadingException("This image can't be loaded...!");
     }

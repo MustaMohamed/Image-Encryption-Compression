@@ -85,7 +85,7 @@ public class Controller implements Initializable {
         try {
           long startTime = System.nanoTime();
           ImageHolder imageHolder = new ImageHolder(imageFile);
-          ImageLoader.displayImage(imageHolder.getImageBuffer(), firstImageView);
+          //ImageLoader.displayImage(imageHolder.getImageBuffer(), firstImageView);
           CompressionController emb = new CompressionController(imageHolder.getImageMatrix());
           
           long endTime = System.nanoTime();
